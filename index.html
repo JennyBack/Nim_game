@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_nim.css">
+    <title>Nim game</title>
+</head>
+<body>
+
+    <h1>NIM</h1>
+    <p>A game of mathematic strategy.</p>
+    <p>Reach for the stars! Pick one, two or three stars from the sky. The player who picks the last star loose the game.</p>
+
+    <section class="intro">
+        <button class= "btn_start" id="startGame">Start playing</button>
+    </section>
+    <section class="container">
+        <div class="players">
+
+            <div class="player" data-name="" id="player1ID">
+                <img src="/resources/player_one_avatar.png" id: "avatar_one" alt="avatar_player_one"><br>
+                <h1 id="name_one" value="">player 1</h1><br>
+                <p>Points: </p><br>
+                <span id="points_player_one" value="0">0</span>
+            </div>
+            <div class="game_area">
+                <div class="game_sticks" id="star_img">
+                   
+                </div>
+            </div>
+
+            <div class="player" data-name="" id="player2ID">
+                <img src="/resources/player_two_avatar.26.png" id: "avatar_one" alt="avatar_player_one"><br>
+                <h1 id="name_two" value="">player 2</h1><br>
+                <p>Points: </p><br>
+                <span id="points_player_two" value="0">0</span>
+            </div>
+        </div>
+        <div class="choice">
+            <button id="btn_choice1" value=1 >1</button>
+            <button id="btn_choice2" value=2 >2</button>
+            <button id="btn_choice3" value=3 >3</button>
+
+        </div>
+        <p>Take 1, 2, or 3 stars from the sky by clicking the buttons</p><br>
+        <p>(No regrets)</p>
+
+        
+    </section>
+   
+    <script src="nim_egen_fil.js"></script>
+</body>
+
+
+</html>
