@@ -40,12 +40,12 @@ class Game {
         this.players.push(newPlayer);
         
     }
-
+    //Metoden väljer en random player som startar spelet.
     pick_start_player (){
         return (Math.random() < 0.5) ? this.players[0] : this.players[1];
 
     }
-
+    //Metoden visar grafiskt vilken spelare det är som är aktiv.
     show_current_player(){
         //visar grafiskt vem som är aktiv spelare
         if (this.current_player === this.players[0]){
@@ -58,24 +58,22 @@ class Game {
         }
         
     }
-
+    //Metoden byter spelare.
     switch_current_player(){
         this.current_player = (this.current_player === this.players[0]) ? this.players[1] : this.players[0];
     }
-
+    //Metod för själva matchen som spelas.
     match(event){
         let choice = Number(event.target.value);
 
         this.stars_in_the_sky = this.stars_in_the_sky - choice;
         this.remove_star(choice);
 
-       console.log(this.current_player.name);
         if (this.stars_in_the_sky === 0){
             this.switch_current_player();
             this.show_current_player();
             this.winner_alert();
             this.current_player.score = this.current_player.score + 2;
-            console.log(this.current_player.score);
             this.continue_game();
             alert("The game will now set for next round");
         }
@@ -84,12 +82,10 @@ class Game {
             this.disable_buttons();
         }
         
-            this.switch_current_player();
-            this.show_current_player();
-        
-           
+        this.switch_current_player();
+        this.show_current_player();   
     }
-   
+    //Metod för att undvika att en spelare klickar på knappar med värde högre än de som finns kvar på spelplanen.
     disable_buttons(){
         let btn_one = document.getElementById("btn_choice1");
         let btn_two = document.getElementById("btn_choice2");
@@ -104,9 +100,7 @@ class Game {
         }
     
     }
-
-
-
+    //Meddelar vinnaren, sätter 2 poäng på vinnaren.
     winner_alert(){
         alert ("You are the winner " + this.current_player.name + " Starshine, your will recieve 2 points!");
         let winner_player_one = document.getElementById("points_player_one");
@@ -122,7 +116,7 @@ class Game {
     }
 
 
-
+    //Metod som återställer antalet stjärnor, grafiska representationer och väljer en ny startspelare.
     continue_game(){
         let btn_two = document.getElementById("btn_choice2");
         let btn_three = document.getElementById("btn_choice3");
@@ -136,10 +130,7 @@ class Game {
        
     }
 
-    stop_game(){
-        //save points to player history?
-    }
-
+    //Metoden lägger till bilderna på stjärnhimlen
     create_sky(){
      for  (let i=0;i<21;i++){
         let img = document.createElement("img");
@@ -150,39 +141,36 @@ class Game {
         parent.appendChild(img);
       }
     }
-
+    //Metoden plockar bort det antal stjärnor som spelaren valt att plocka bort.
     remove_star(choice){
         let parent = document.getElementById("star_img");
-        //parent.removeChild(parent.lastChild); 
         for (let i = 1; i <= choice; i++) {
             parent.removeChild(parent.lastChild);
-          }
-        /*while (choice <= choice) {  
-            parent.removeChild(parent.lastChild);
-          }*/
+        }
     }
 }
+
+//-----------------------//
+
 document.addEventListener("DOMContentLoaded", function(e){
-document.getElementById("startGame").addEventListener("click", function (){
-    let game1 = new Game();
-    game1.start_game();
-    let myFunction = game1.match;
-    myFunction = myFunction.bind(game1);
-    //
+    document.getElementById("startGame").addEventListener("click", function (){
+        let game1 = new Game();
+        game1.start_game();
 
-    document
-    .getElementById("btn_choice1")
-    .addEventListener("click", myFunction);  
-    
-    document
-    .getElementById("btn_choice2")
-    .addEventListener("click", myFunction); 
+        document
+        .getElementById("btn_choice1")
+        .addEventListener("click", (event) => game1.match(event));  
+        
+        document
+        .getElementById("btn_choice2")
+        .addEventListener("click", (event) => game1.match(event)); 
 
-    document
-    .getElementById("btn_choice3")
-    .addEventListener("click", myFunction); 
-    
+        document
+        .getElementById("btn_choice3")
+        .addEventListener("click", (event) => game1.match(event)); 
 
-});
+        //Jag har fått lite hjälp att lösa att jag tappade "this". Jag har försökt sätta mig in
+        //i problemet men inte helt förstått det. Binding function.https://javascript.info/bind
+    });
 
 });
